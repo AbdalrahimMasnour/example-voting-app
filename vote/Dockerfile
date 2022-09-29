@@ -3,18 +3,10 @@ FROM python:3.9-slim
 
 # add curl for healthcheck
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends   \
+    && apt-get install -y --no-install-recommends \
     curl \
-    && rm -rf /var/lib/apt/lists/* sudo
+    && rm -rf /var/lib/apt/lists/*
 
-RUN adduser --disabled-password --gecos '' docker
-RUN adduser docker sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-USER docker
-
-# this is where I was running into problems with the other approaches
-RUN sudo apt-get update 
 # Set the application directory
 WORKDIR /app
 
